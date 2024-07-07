@@ -5,38 +5,27 @@ import com.alena.models.Region;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
 
 public class GetCountryListTest extends AccuweatherTest {
-    @Test
-    public void getList_statusSuccess(){
-        given()
-                .queryParam("apikey", getApiKey())
-                .pathParam("version","v1")
-                .pathParam("region","AFR")
-                .when()
-                .get(getBaseURL()+"locations/{version}/countries/{region}")
-                .then()
-                .statusCode(200);
-
-
+    @Override
+    protected String getPath() {
+        return "locations/{version}/countries/{region}";
     }
-    @Test
-    public void getList_statusError(){
-        given()
-                .queryParam("apikey", "")
-                .pathParam("version","v1")
-                .pathParam("region","AFR")
-                .when()
-                .get(getBaseURL()+"locations/{version}/countries/{region}")
-                .then()
-                .statusCode(401);
 
-
+    @Override
+    protected Map<String, String> getPathParams() {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("region","AFR");
+        return hashMap;
     }
+
+
     @Test
     public void getList_itemCount(){
         List<Country> countryList=given()
@@ -44,7 +33,7 @@ public class GetCountryListTest extends AccuweatherTest {
                 .pathParam("version","v1")
                 .pathParam("region","AFR")
                 .when()
-                .get(getBaseURL()+"locations/{version}/countries/{region}")
+                .get(getBaseURL()+getPath())
                 .then()
                 .extract()
                 .body()
@@ -61,7 +50,7 @@ public class GetCountryListTest extends AccuweatherTest {
                 .pathParam("version","v1")
                 .pathParam("region","AFR")
                 .when()
-                .get(getBaseURL()+"locations/{version}/countries/{region}")
+                .get(getBaseURL()+getPath())
                 .then()
                 .extract()
                 .body()

@@ -1,11 +1,11 @@
 package com.alena;
 
+import com.alena.models.AdministrativeArea;
 import com.alena.models.City;
-import com.alena.models.Country;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,26 +14,25 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 
-public class CitySearchTest extends AccuweatherTest {
+public class TopCityListTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/cities/search";
+        return "locations/{version}/topcities/{group}";
     }
 
     @Override
-    protected Map<String, String> getQueryParams() {
+    protected Map<String, String> getPathParams() {
         HashMap<String, String> hashMap = new HashMap<String, String>();
-        hashMap.put("q","A");
+        hashMap.put("group","50");
         return hashMap;
     }
-
     @ParameterizedTest
-    @CsvSource({"a,7", "bel,13", "gfdgergre,0"})
-    public void citySearch_itemCount(String query, int itemCount){
+    @ValueSource(ints = {50,100,150})
+    public void getList_itemCount(int itemCount){
         List<City> cityList=given()
                 .queryParam("apikey", getApiKey())
                 .pathParam("version","v1")
-                .queryParam("q",query)
+                .pathParam("group",itemCount)
                 .when()
                 .get(getBaseURL()+getPath())
                 .then()
@@ -45,5 +44,6 @@ public class CitySearchTest extends AccuweatherTest {
 
 
     }
+
 
 }

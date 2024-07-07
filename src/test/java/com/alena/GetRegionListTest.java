@@ -10,37 +10,18 @@ import static io.restassured.RestAssured.given;
 
 
 public class GetRegionListTest extends AccuweatherTest {
-    @Test
-    public void getList_statusSuccess(){
-        given()
-                .queryParam("apikey", getApiKey())
-                .pathParam("version","v1")
-                .when()
-                .get(getBaseURL()+"locations/{version}/regions")
-                .then()
-                .statusCode(200);
-
-
+    @Override
+    protected String getPath() {
+        return "locations/{version}/regions";
     }
-    @Test
-    public void getList_statusError(){
-        given()
-                .queryParam("apikey", "")
-                .pathParam("version","v1")
-                .when()
-                .get(getBaseURL()+"locations/{version}/regions")
-                .then()
-                .statusCode(401);
 
-
-    }
     @Test
     public void getList_itemCount(){
         List<Region> regionList=given()
                 .queryParam("apikey", getApiKey())
                 .pathParam("version","v1")
                 .when()
-                .get(getBaseURL()+"locations/{version}/regions")
+                .get(getBaseURL()+getPath())
                 .then()
                 .extract()
                 .body()

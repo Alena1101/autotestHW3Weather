@@ -7,38 +7,27 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
 
 public class AdminAreaListTest extends AccuweatherTest {
-    @Test
-    public void getList_statusSuccess(){
-        given()
-                .queryParam("apikey", getApiKey())
-                .pathParam("version","v1")
-                .pathParam("countryID","IN")
-                .when()
-                .get(getBaseURL()+"locations/{version}/adminareas/{countryID}")
-                .then()
-                .statusCode(200);
-
-
+    @Override
+    protected String getPath() {
+        return "locations/{version}/adminareas/{countryID}";
     }
-    @Test
-    public void getList_statusError(){
-        given()
-                .queryParam("apikey", "")
-                .pathParam("version","v1")
-                .pathParam("countryID","IN")
-                .when()
-                .get(getBaseURL()+"locations/{version}/adminareas/{countryID}")
-                .then()
-                .statusCode(401);
 
-
+    @Override
+    protected Map<String, String> getPathParams() {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("countryID","IN");
+        return hashMap;
     }
+
+
     @ParameterizedTest
     @CsvSource({"IN,37", "PK,8", "pi,0"})
     public void getList_itemCount(String countryID, int itemCount){
@@ -47,7 +36,7 @@ public class AdminAreaListTest extends AccuweatherTest {
                 .pathParam("version","v1")
                 .pathParam("countryID",countryID)
                 .when()
-                .get(getBaseURL()+"locations/{version}/adminareas/{countryID}")
+                .get(getBaseURL()+getPath())
                 .then()
                 .extract()
                 .body()
@@ -57,5 +46,6 @@ public class AdminAreaListTest extends AccuweatherTest {
 
 
     }
+
 
 }
