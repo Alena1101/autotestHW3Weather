@@ -17,7 +17,7 @@ import static io.restassured.RestAssured.given;
 public class AdminAreaListTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/adminareas/{countryID}";
+        return "locations/v1/adminareas/{countryID}";
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AdminAreaListTest extends AccuweatherTest {
     public void getList_itemCount(String countryID, int itemCount){
         List<AdministrativeArea> administrativeAreaList=given()
                 .queryParam("apikey", getApiKey())
-                .pathParam("version","v1")
+                
                 .pathParam("countryID",countryID)
                 .when()
                 .get(getBaseURL()+getPath())

@@ -6,7 +6,7 @@ import java.util.Map;
 public class PostalCodeSearchWithOneParamTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/postalcodes/{countryCode}/search";
+        return "locations/v1/postalcodes/{countryCode}/search";
     }
 
     @Override

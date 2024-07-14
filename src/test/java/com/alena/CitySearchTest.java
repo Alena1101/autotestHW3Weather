@@ -17,7 +17,7 @@ import static io.restassured.RestAssured.given;
 public class CitySearchTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/cities/search";
+        return "/locations/v1/cities/search";
     }
 
     @Override
@@ -32,7 +32,6 @@ public class CitySearchTest extends AccuweatherTest {
     public void citySearch_itemCount(String query, int itemCount){
         List<City> cityList=given()
                 .queryParam("apikey", getApiKey())
-                .pathParam("version","v1")
                 .queryParam("q",query)
                 .when()
                 .get(getBaseURL()+getPath())

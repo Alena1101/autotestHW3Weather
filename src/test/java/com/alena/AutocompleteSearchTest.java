@@ -15,7 +15,7 @@ import static io.restassured.RestAssured.given;
 public class AutocompleteSearchTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/cities/autocomplete";
+        return "locations/v1/cities/autocomplete";
     }
 
     @Override

@@ -15,7 +15,7 @@ import static io.restassured.RestAssured.given;
 public class GetCountryListTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/countries/{region}";
+        return "locations/v1/countries/{region}";
     }
 
     @Override
@@ -30,7 +30,7 @@ public class GetCountryListTest extends AccuweatherTest {
     public void getList_itemCount(){
         List<Country> countryList=given()
                 .queryParam("apikey", getApiKey())
-                .pathParam("version","v1")
+                
                 .pathParam("region","AFR")
                 .when()
                 .get(getBaseURL()+getPath())
@@ -47,7 +47,7 @@ public class GetCountryListTest extends AccuweatherTest {
     public void getList_idCheck(){
         List<Country> countryList=given()
                 .queryParam("apikey", getApiKey())
-                .pathParam("version","v1")
+                
                 .pathParam("region","AFR")
                 .when()
                 .get(getBaseURL()+getPath())

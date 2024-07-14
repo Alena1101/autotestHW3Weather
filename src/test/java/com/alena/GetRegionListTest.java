@@ -12,14 +12,14 @@ import static io.restassured.RestAssured.given;
 public class GetRegionListTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/regions";
+        return "locations/v1/regions";
     }
 
     @Test
     public void getList_itemCount(){
         List<Region> regionList=given()
                 .queryParam("apikey", getApiKey())
-                .pathParam("version","v1")
+                
                 .when()
                 .get(getBaseURL()+getPath())
                 .then()

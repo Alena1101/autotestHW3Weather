@@ -15,7 +15,7 @@ import static io.restassured.RestAssured.given;
 public class GeoPositionSearchTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/cities/geoposition/search";
+        return "locations/v1/cities/geoposition/search";
     }
 
     @Override

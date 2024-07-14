@@ -6,7 +6,7 @@ import java.util.Map;
 public class SearchByLocationKeyTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/{locationKey}";
+        return "locations/v1/{locationKey}";
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.Map;
 public class TextSearchWithOneParamTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/{countryCode}/search";
+        return "locations/v1/{countryCode}/search";
     }
 
     @Override

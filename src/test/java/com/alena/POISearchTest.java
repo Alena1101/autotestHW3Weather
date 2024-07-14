@@ -6,7 +6,7 @@ import java.util.Map;
 public class POISearchTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/poi/search";
+        return "locations/v1/poi/search";
     }
 
     @Override

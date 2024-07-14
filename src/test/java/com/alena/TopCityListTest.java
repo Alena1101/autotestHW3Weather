@@ -17,7 +17,7 @@ import static io.restassured.RestAssured.given;
 public class TopCityListTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/{version}/topcities/{group}";
+        return "locations/v1/topcities/{group}";
     }
 
     @Override
@@ -31,7 +31,7 @@ public class TopCityListTest extends AccuweatherTest {
     public void getList_itemCount(int itemCount){
         List<City> cityList=given()
                 .queryParam("apikey", getApiKey())
-                .pathParam("version","v1")
+                
                 .pathParam("group",itemCount)
                 .when()
                 .get(getBaseURL()+getPath())
