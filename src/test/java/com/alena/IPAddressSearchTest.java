@@ -7,7 +7,7 @@ public class IPAddressSearchTest extends AccuweatherTest {
 
     @Override
     protected String getPath() {
-        return "locations/v1/cities/ipaddress";
+        return "/locations/v1/cities/ipaddress";
     }
     @Override
     protected Map<String, String> getQueryParams() {

@@ -6,7 +6,7 @@ import java.util.Map;
 public class POISearchWithTwoParamsTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/v1/poi/{countryCode}/{adminCode}/search";
+        return "/locations/v1/poi/{countryCode}/{adminCode}/search";
     }
 
     @Override

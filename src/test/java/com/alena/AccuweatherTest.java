@@ -1,6 +1,8 @@
 package com.alena;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,8 +52,22 @@ public abstract class AccuweatherTest extends AbstractTest {
     @Test
     public void statusSuccess(){
         logger.info("Тест код ответ 200 запущен");
+        ObjectMapper mapper = new ObjectMapper();
 
-        logger.debug("Формирование мока для GET /locations/v1/cities/autocomplete");
+        logger.debug("Формирование мока для GET "+ getPath());
+        MappingBuilder mappingBuilder = get(urlPathTemplate(getPath()));
+        for (Map.Entry<String,String> param: getQueryParams().entrySet()){
+            mappingBuilder.withQueryParam(param.getKey(),equalTo(param.getValue()));
+
+        }
+        for (Map.Entry<String,String> param: getPathParams().entrySet()){
+            mappingBuilder.withPathParam(param.getKey(),equalTo(param.getValue()));
+
+        }
+
+        mappingBuilder.willReturn(aResponse()
+                        .withStatus(200));
+        stubFor(mappingBuilder);
 
         logger.debug("http клиент создан");
 
@@ -76,7 +92,7 @@ public abstract class AccuweatherTest extends AbstractTest {
         logger.info("Тест код ответ 401 запущен");
 
         logger.debug("Формирование мока для GET "+getPath());
-        stubFor(get(urlPathEqualTo(getPath()))
+        stubFor(get(urlPathTemplate(getPath()))
                 .withQueryParam("apiKey", notMatching(getApiKey()))
                 .willReturn(aResponse()
                         .withStatus(401).withBody("ERROR")));

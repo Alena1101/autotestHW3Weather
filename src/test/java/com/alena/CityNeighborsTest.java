@@ -6,7 +6,7 @@ import java.util.Map;
 public class CityNeighborsTest extends AccuweatherTest {
     @Override
     protected String getPath() {
-        return "locations/v1/cities/neighbors/{locationKey}";
+        return "/locations/v1/cities/neighbors/{locationKey}";
     }
 
     @Override
