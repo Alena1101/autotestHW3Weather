@@ -1,10 +1,10 @@
 package com.alena;
 
-import com.alena.models.AdministrativeArea;
 import com.alena.models.City;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
@@ -13,7 +13,8 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-
+@Epic(value = "Тестирование API http://dataservice.accuweather.com/")
+@Feature(value = "Тестирование запроса locations/{version}/topcities/{group}")
 public class TopCityListTest extends AccuweatherTest {
     @Override
     protected String getPath() {
@@ -28,6 +29,12 @@ public class TopCityListTest extends AccuweatherTest {
     }
     @ParameterizedTest
     @ValueSource(ints = {50,100,150})
+    @DisplayName("Список городов")
+    @Description("Запрос должен возвращать указанное количество элементов в списке")
+    @Link("http://dataservice.accuweather.com/locations/v1/topcities/100")
+    @Severity(SeverityLevel.MINOR)
+    @Owner("Ермоленко Елена")
+    @Story(value = "Работа со списком")
     public void getList_itemCount(int itemCount){
         List<City> cityList=given()
                 .queryParam("apikey", getApiKey())

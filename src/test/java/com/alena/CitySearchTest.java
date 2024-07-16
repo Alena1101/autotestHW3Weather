@@ -1,9 +1,9 @@
 package com.alena;
 
 import com.alena.models.City;
-import com.alena.models.Country;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -13,7 +13,8 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-
+@Epic(value = "Тестирование API http://dataservice.accuweather.com/")
+@Feature(value = "Тестирование запроса locations/{version}/cities/search")
 public class CitySearchTest extends AccuweatherTest {
     @Override
     protected String getPath() {
@@ -26,7 +27,12 @@ public class CitySearchTest extends AccuweatherTest {
         hashMap.put("q","A");
         return hashMap;
     }
-
+    @DisplayName("Поиск города")
+    @Description("Проверка количества вариантов при поиске по параметру")
+    @Link("http://dataservice.accuweather.com/locations/v1/cities/search")
+    @Severity(SeverityLevel.MINOR)
+    @Owner("Ермоленко Елена")
+    @Story(value = "Поиск")
     @ParameterizedTest
     @CsvSource({"a,7", "bel,13", "gfdgergre,0"})
     public void citySearch_itemCount(String query, int itemCount){

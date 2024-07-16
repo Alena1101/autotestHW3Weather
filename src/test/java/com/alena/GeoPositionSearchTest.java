@@ -1,17 +1,13 @@
 package com.alena;
 
-import com.alena.models.City;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
-
-
+@Epic(value = "Тестирование API http://dataservice.accuweather.com/")
+@Feature(value = "Тестирование запроса locations/{version}/cities/geoposition/search")
 public class GeoPositionSearchTest extends AccuweatherTest {
     @Override
     protected String getPath() {

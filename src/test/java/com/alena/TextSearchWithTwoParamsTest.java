@@ -1,8 +1,12 @@
 package com.alena;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+
 import java.util.HashMap;
 import java.util.Map;
-
+@Epic(value = "Тестирование API http://dataservice.accuweather.com/")
+@Feature(value = "Тестирование запроса locations/{version}/{countryCode}/{adminCode}/search")
 public class TextSearchWithTwoParamsTest extends AccuweatherTest {
     @Override
     protected String getPath() {

@@ -1,12 +1,13 @@
 package com.alena;
 
+import io.qameta.allure.*;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -38,6 +39,12 @@ public abstract class AccuweatherTest {
     }
 
     @Test
+    @DisplayName("Статус код 200")
+    @Description("Проверка, что запрос актуален и успешно выполняется")
+    @Link("")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Ермоленко Елена")
+    @Story(value = "Успех")
     public void statusSuccess(){
         RequestSpecification requestSpecification = given();
         requestSpecification
@@ -56,6 +63,12 @@ public abstract class AccuweatherTest {
 
     }
     @Test
+    @DisplayName("Статус код 401")
+    @Description("Проверка авторизации пользователя. Неавторизованный пользователь не должен иметь доступ к этим данным")
+    @Link("")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Ермоленко Елена")
+    @Story(value = "Запрос без авторизации")
     public void statusError(){
         RequestSpecification requestSpecification = given();
         requestSpecification
