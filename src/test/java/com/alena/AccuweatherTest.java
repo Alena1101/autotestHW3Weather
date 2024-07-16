@@ -21,7 +21,7 @@ public abstract class AccuweatherTest {
     @BeforeAll
     public  void before()  {
 
-        apiKey = "SFAxpDFiktGRAJc0FKNQDhkjHAGIhr7A";
+        apiKey = "ibU4M3nR7Bq5mquE5In0MPnFyU6YdkdX";
         baseURL = "http://dataservice.accuweather.com/";
 
 
